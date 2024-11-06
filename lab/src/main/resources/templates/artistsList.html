@@ -37,13 +37,13 @@
     <form th:method="POST" th:action="@{/artist}">
         <input type="hidden" name="trackId" th:value="${trackId}"/>
         <div th:each="artist : ${artistList}">
-            <input type="radio" name="artistId" th:id="${artist.getId()}" th:value="${artist.getId()}">
+            <input type="radio" name="artistId" th:value="${artist.getId()}">
             <label th:for="${artist.getId()}" th:text="${artist.getFirstName()} + ' ' + ${artist.getLastName()}"></label>
             <br/>
         </div>
     <br/>
 
-    <input type='submit' value='Add artist'>
+        <input type='submit' value='Add artist'>
     </form>
 </section>
 <aside>

@@ -36,7 +36,7 @@ public class ArtistServlet extends HttpServlet{
         WebContext context = new WebContext(iWebExchange);
 
         context.setVariable("artistList", artistList);
-        templateEngine.process("listArtists.html", context, resp.getWriter());
+        templateEngine.process("artistsList.html", context, resp.getWriter());
     }
 
     @Override
@@ -45,11 +45,16 @@ public class ArtistServlet extends HttpServlet{
         List<Artist> artistList;
         artistList = artistService.listArtists();
 
+        /*
         if(req.getParameter("songRadio") != null){
             trackId = req.getParameter("songRadio");
         }else{
             trackId = "-";
         }
+
+         */
+        trackId = req.getParameter("trackId");
+        String artistId = req.getParameter("artistId");
 
         IWebExchange iWebExchange = JakartaServletWebApplication
                 .buildApplication(req.getServletContext())
@@ -57,7 +62,7 @@ public class ArtistServlet extends HttpServlet{
         WebContext context = new WebContext(iWebExchange);
         context.setVariable("trackId", trackId);
         context.setVariable("artistList", artistList);
-        templateEngine.process("listArtists.html", context, resp.getWriter());
+        templateEngine.process("artistsList.html", context, resp.getWriter());
     }
 
 }
