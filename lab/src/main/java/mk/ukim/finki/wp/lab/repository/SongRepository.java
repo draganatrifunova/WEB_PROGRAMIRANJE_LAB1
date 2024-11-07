@@ -22,12 +22,7 @@ public class SongRepository {
     }
 
     public Artist addArtistToSong(Artist artist, Song song){
-        for(Song s:DataHolder.songList){
-            if(s.getTrackId().equals(song.getTrackId())){
-                s.addArtistToList(artist);
-                return artist;
-            }
-        }
-        return null;
+        song.addArtistToList(artist);
+        return artist;
     }
 }

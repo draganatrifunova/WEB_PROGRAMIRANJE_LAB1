@@ -33,35 +33,12 @@ public class SongDetailsServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Song s = songService.listSongs()
-                .stream()
-                .findFirst()
-                .orElse(null);
-
-        IWebExchange iWebExchange = JakartaServletWebApplication
-                .buildApplication(req.getServletContext())
-                .buildExchange(req, resp);
-
-        WebContext context = new WebContext(iWebExchange);
-        context.setVariable("entity", s);
-        templateEngine.process("songDetails.html", context, resp.getWriter());
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String trackId = req.getParameter("trackId");
         String artistId = req.getParameter("artistId");
-        Song s = songService.listSongs()
-                .stream()
-                .findFirst()
-                .orElse(null);
-
-        if(trackId != null && artistId != null){
-            s = songService.findByTrackId(trackId);
-            Artist a = artistService.findById(Long.valueOf(artistId));
-            s.addArtistToList(a);
-        }
+        Song s = songService.findByTrackId(trackId);
+        Artist a = artistService.findById(Long.parseLong(artistId));
+        s.addArtistToList(a);
 
         IWebExchange iWebExchange = JakartaServletWebApplication
                 .buildApplication(req.getServletContext())
